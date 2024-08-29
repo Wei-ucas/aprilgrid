@@ -25,8 +25,9 @@ class Detector:
     def detect(self, img: np.ndarray) -> List[Detection]:
         # step 1 resize
         max_size = np.max(img.shape)
-        im_blur = cv2.GaussianBlur(img, (3, 3), 1)
-        im_blur_resize = im_blur.copy()
+        # im_blur = cv2.GaussianBlur(img, (3, 3), 1)
+        # im_blur_resize = im_blur.copy()
+        im_blur_resize = img.copy()
         new_size_ratio = 1
         if max_size > self.detect_max_size:
             new_size_ratio = self.detect_max_size / max_size
