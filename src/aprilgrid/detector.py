@@ -16,6 +16,7 @@ class Detector:
     decode_sharpening: float = 0.25
     min_white_black_diff: int = 5
     debug_level: int = 0
+    detect_max_size: int = 1000
 
     def __post_init__(self):
         self.tag_family = TAG_FAMILY_DICT[self.tag_family_name]
@@ -27,8 +28,8 @@ class Detector:
         im_blur = cv2.GaussianBlur(img, (3, 3), 1)
         im_blur_resize = im_blur.copy()
         new_size_ratio = 1
-        if max_size > 1000:
-            new_size_ratio = 1000.0 / max_size
+        if max_size > self.detect_max_size:
+            new_size_ratio = self.detect_max_size / max_size
             im_blur_resize = cv2.resize(
                 im_blur_resize, None, None, new_size_ratio, new_size_ratio)
 
